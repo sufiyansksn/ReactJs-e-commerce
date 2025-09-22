@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { Header } from "../components/Header";
 import { products } from "../../starting-code/data/products.js";
 import "./HomePage.css";
@@ -21,10 +22,22 @@ export function HomePage() {
                 console.log(data);
             }); 
     */} 
-    axios.get('http://localhost:3000/api/products')
+    {/* Whenever the HomePage changes or re-renders it will run this code again.
+        instade another request to backend. However we just need this products run once on thsi page.
+        We don't need to load the products over and over again. To make this code once, we put inside useEffect. 
+    */}
+
+    const [products, setProducts] = useState([]);  {/* useEffect gives an array with 2 values. the first effect is a name of the data
+                                2. Updater function This is lets us update the first value and this re-generate the HTML */}
+
+    useEffect(() => {
+        axios.get('http://localhost:3000/api/products')
         .then((response) => {
-            console.log(response.data);
+            setProducts(response.data); {/* This will save the backend products data into products */}
         });
+    }, []); {/* This is called a Dependency array. this lets us control when useEffect runs. 
+                if we use an empty arrya([]) that means this code runs only ones after component created */}
+    
 
     return (
         <>
