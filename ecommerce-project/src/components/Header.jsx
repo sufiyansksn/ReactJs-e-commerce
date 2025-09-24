@@ -6,7 +6,6 @@ export function Header({ cart }) { {/* getting cart form props */}
 
     cart.forEach((cartItem) => {
         totalQuantity += cartItem.quantity;
-        console.log(totalQuantity);
     });
 
     return (
