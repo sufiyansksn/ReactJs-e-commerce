@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Header } from "../components/Header";
-import { products } from "../../starting-code/data/products.js";
+import { products } from '../../starting-code/data/products.js'
 import "./HomePage.css";
 
 export function HomePage() {
@@ -28,22 +28,33 @@ export function HomePage() {
     */}
 
     const [products, setProducts] = useState([]);  {/* useEffect gives an array with 2 values. the first effect is a name of the data
-                                2. Updater function This is lets us update the first value and this re-generate the HTML */}
+                                                        2. Updater function This is lets us update the first 
+                                                            value and this re-generate the HTML */}
+
+    const [ cart, setCart ] = useState([]);
 
     useEffect(() => {
         axios.get('http://localhost:3000/api/products')
         .then((response) => {
             setProducts(response.data); {/* This will save the backend products data into products */}
         });
+
+        axios.get('http://localhost:3000/api/cart-items')
+            .then((response) => {
+                setCart(response.data);
+            })
+
     }, []); {/* This is called a Dependency array. this lets us control when useEffect runs. 
                 if we use an empty arrya([]) that means this code runs only ones after component created */}
+
+    
     
 
     return (
         <>
         <title>Ecommerce Project</title>
 
-        <Header />
+        <Header cart={cart} /> {/* Remember quantity for the cart in the header. So for the we need to pass the cart into header using a prompt */}
 
         <div className="home-page">
             <div className="products-grid">
