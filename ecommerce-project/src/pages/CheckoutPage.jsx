@@ -7,17 +7,17 @@ import "./CheckoutPage.css";
 
 export function CheckoutPage({ cart }) {
   const [deliveryOptions, setDeliveryOptions] = useState([]);
-  const [paymentSummary, setPaymentSummary] = useState(); // paymentSummary is going to be object. and it is little easier to check if the object is not loaded if we set it to null at the start
+  const [paymentSummary, setPaymentSummary] = useState([null]); // paymentSummary is going to be object. and it is little easier to check if the object is not loaded if we set it to null at the start
 
   useEffect(() => {
-    axios
-      .get("/api/delivery-options?expand=estimatedDeliveryTime")
+    axios.get("/api/delivery-options?expand=estimatedDeliveryTime")
       .then((response) => {
         setDeliveryOptions(response.data);
       });
 
-    axios.get("/api/payment-summary").then((response) => {
-      setPaymentSummary(response.data);
+    axios.get("/api/payment-summary")
+      .then((response) => {
+        setPaymentSummary(response.data);
     });
   }, []);
 
@@ -129,12 +129,10 @@ export function CheckoutPage({ cart }) {
                             >
                               <input
                                 type="radio"
-                                checked={
-                                  deliveryOption.id ===
-                                  cartItem.deliveryOptionId
-                                }
+                                checked = {deliveryOption.id === cartItem.deliveryOptionId}
+
                                 className="delivery-option-input"
-                                name={`delivery-option-${cartItem.productId}`}
+                                name={`delivery-option-${cartItem.productId}`}  // name groups the selectors together, So each set of selector should have a unique name. This make sure each product we can only select one of them. that's whhy we use {cartItem.productId} eachs set of selector should belongs to one product
                               />
                               <div>
                                 <div className="delivery-option-date">
@@ -161,7 +159,7 @@ export function CheckoutPage({ cart }) {
       {/* Generating the paymentSummary Data from the backend */}
 
           {/* if pyamentSummary loads only we displyas the html data other 
-              Otherwise we don't have. if paymentSummary null at athe start,
+              Otherwise we don't have. if paymentSummary null at the start,
               it's not gonna run rest of the code. */}
           {paymentSummary && (
             <>
