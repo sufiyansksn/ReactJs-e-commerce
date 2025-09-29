@@ -10,11 +10,24 @@ import './App.css'
 function App() {
   const [cart, setCart] = useState([]);
 
+  {/*
   useEffect(() => {
     axios.get('/api/cart-items?expand=product')  // When the backend receive this query parameter it's gonna add product details to the cart. it's going to expand the cart with product details.
       .then((response) => {
         setCart(response.data);
       });
+  },[]);
+  */}
+
+  // writing await for waiting to finish the backend request and save the result in a variable.
+  useEffect(() => {
+    const fetchAppData = async () => {
+      const response = await axios.get('/api/cart-items?expand=product')  // When the backend receive this query parameter it's gonna add product details to the cart. it's going to expand the cart with product details.
+        setCart(response.data);
+    }
+
+    fetchAppData();
+
   },[]);
   
 

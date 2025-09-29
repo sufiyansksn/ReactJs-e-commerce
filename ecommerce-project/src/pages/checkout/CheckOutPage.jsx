@@ -9,6 +9,7 @@ export function CheckoutPage({ cart }) {
   const [deliveryOptions, setDeliveryOptions] = useState([]);
   const [paymentSummary, setPaymentSummary] = useState([null]); // paymentSummary is going to be object. and it is little easier to check if the object is not loaded if we set it to null at the start
 
+  {/*
   useEffect(() => {
     axios.get("/api/delivery-options?expand=estimatedDeliveryTime")
       .then((response) => {
@@ -20,6 +21,19 @@ export function CheckoutPage({ cart }) {
         setPaymentSummary(response.data);
     });
   }, []);
+  */}
+
+
+  useEffect(() => {
+    const fetchCheckoutData = async () => {
+      let response = await axios.get("/api/delivery-options?expand=estimatedDeliveryTime")
+        setDeliveryOptions(response.data);
+
+      response = await axios.get("/api/payment-summary")
+        setPaymentSummary(response.data);
+    }
+    fetchCheckoutData();
+  },[]);
 
   return (
     <>

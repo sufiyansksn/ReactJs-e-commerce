@@ -32,15 +32,28 @@ export function HomePage( {cart} ) {
                                                         2. Updater function This is lets us update the first 
                                                             value and this re-generate the HTML */}
 
-
+    {/*
     useEffect(() => {
         axios.get('/api/products')
         .then((response) => {
-            setProducts(response.data);     {/* This will save the backend products data into products */}
+            setProducts(response.data);     // This will save the backend products data into products 
         });
 
-    }, []); {/* This is called a Dependency array. this lets us control when useEffect runs. 
+    }, []); // This is called a Dependency array. this lets us control when useEffect runs. 
                 if we use an empty arrya([]) that means this code runs only ones after component created */}
+
+
+    {/*This is same data as before but uses async await. Remember async await inside useEffect we need to 
+     create a new function and then run the function other wise it will break the rules of useeffect. */}
+    useEffect(() => {
+        const getHomeData = async () => {
+            const response = await axios.get('/api/products')
+            setProducts(response.data)
+        }
+
+        getHomeData();
+        
+    },[])
 
 
     return (
