@@ -20,23 +20,22 @@ function App() {
   */}
 
   // writing await for waiting to finish the backend request and save the result in a variable.
-  useEffect(() => {
-    const fetchAppData = async () => {
+  const loadCart = async () => {
       const response = await axios.get('/api/cart-items?expand=product')  // When the backend receive this query parameter it's gonna add product details to the cart. it's going to expand the cart with product details.
         setCart(response.data);
     }
 
-    fetchAppData();
-
+  useEffect(() => {
+    loadCart();
   },[]);
   
 
   return (
     <Routes>
-      <Route index element={<HomePage cart={cart} />} />    {/* or <Route path="/" element={<HomePage />}></Route> */}
+      <Route index element={<HomePage cart={cart} loadCart={loadCart} />} />    {/* or <Route path="/" element={<HomePage />}></Route> */}
       <Route path="checkout" element={<CheckoutPage cart={cart} />} />
       <Route path="orders" element={<OrdersPage cart={cart} />} />
-      <Route path="tracking" element={<TrackingPage cart={cart} />} />
+      <Route path="tracking/:orderId/:productId" element={<TrackingPage cart={cart} />} />
     </Routes>
   )
 }

@@ -5,7 +5,7 @@ import { ProductsGrid } from './ProductsGrid.jsx';
 import "./HomePage.css";
 
 
-export function HomePage( {cart} ) {
+export function HomePage( {cart, loadCart} ) {
     {/* your code is asking your local server for products. 
         When the server replies, you are just printing the reply details in the console.
         The then means “after this is done”. Here it says: after the server sends back a reply, 
@@ -63,7 +63,7 @@ export function HomePage( {cart} ) {
         <Header cart={cart} />      {/* Remember quantity for the cart in the header. So for the we need to pass the cart into header using a prompt */}
 
         <div className="home-page">
-            <ProductsGrid products={products} />  {/* we separated products grid into smaller component */}
+            <ProductsGrid products={products} loadCart={loadCart} />  {/* we separated products grid into smaller component */}
         </div>
         </>
     );
