@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import "./checkout-header.css";
 import "./CheckoutPage.css";
 
-export function CheckoutPage({ cart }) {
+export function CheckoutPage({ cart, loadCart }) {
   const [deliveryOptions, setDeliveryOptions] = useState([]);
   const [paymentSummary, setPaymentSummary] = useState([null]); // paymentSummary is going to be object. and it is little easier to check if the object is not loaded if we set it to null at the start
 
@@ -33,8 +33,11 @@ export function CheckoutPage({ cart }) {
         setPaymentSummary(response.data);
     }
     fetchCheckoutData();
-  },[]);
 
+  },[cart]); {/* This is the dependency array. This Dependency array determines when 
+             useEffet runs.Right now it is empyt([]) it means useEffect only runs once.
+             However whenever we change a value un Dependency array it will re-run the useEffect.
+             So we can put the cart inside the dependency array. whenever cart changes it will re runs the useEffect and update the payment summary. */}
   return (
     <>
       <title>Checkout</title>
@@ -66,7 +69,7 @@ export function CheckoutPage({ cart }) {
         <div className="page-title">Review your order</div>
 
         <div className="checkout-grid">
-          <OrderSummary cart={cart} deliveryOptions={deliveryOptions} />
+          <OrderSummary cart={cart} deliveryOptions={deliveryOptions} loadCart={loadCart} />
 
           <PaymentSummary paymentSummary={paymentSummary} />
         </div>
