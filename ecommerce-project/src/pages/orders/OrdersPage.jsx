@@ -1,6 +1,5 @@
 import axios from 'axios';
 import dayjs from 'dayjs';
-import { useNavigate } from 'react-router';
 import { useState, useEffect, Fragment } from 'react';
 import { Header } from '../../components/Header.jsx';
 import { formatMoney } from '../../utils/money.js'
@@ -17,18 +16,6 @@ export function OrdersPage({ cart, loadCart }) {
 
         fetchOrdersData();
     }, []);
-
-
-    const navigatess = useNavigate();
-
-    const addProductToCart = async () => {
-        await axios.post('/api/cart-items')
-        await loadCart();
-        navigatess('/checkout')
-    }
-
-    
-
     
     return (
         <>
@@ -65,6 +52,16 @@ export function OrdersPage({ cart, loadCart }) {
 
                     <div className="order-details-grid">
                     {order.products.map((orderProduct) => {
+
+                        const addToCart = async () => {
+                            await axios.post('/api/cart-items', {
+                                productId: orderProduct.product.id,
+                                quantity: 1
+                            });
+                            await loadCart();
+                        };
+
+
                         return (
                         <Fragment key={orderProduct.product.id}>
                             <div className="product-image-container">
@@ -84,7 +81,7 @@ export function OrdersPage({ cart, loadCart }) {
                             <button className="buy-again-button button-primary">
                                 <img className="buy-again-icon" src="images/icons/buy-again.png" />
                                 <span className="buy-again-message"
-                                    onClick={addProductToCart}    
+                                    onClick={addToCart}    
                                 >Add to Cart</span>
                             </button>
                             </div>
