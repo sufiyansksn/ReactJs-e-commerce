@@ -7,10 +7,10 @@ export default defineConfig({
   server: {
     proxy:{
       '/api': {
-        target: "https://reactjs-backend-xute.onrender.com"
+        target: 'http://localhost:3000'
       },
       '/images': {
-        target: "https://reactjs-backend-xute.onrender.com"
+        target: 'http://localhost:3000'
       }
     }
   }
