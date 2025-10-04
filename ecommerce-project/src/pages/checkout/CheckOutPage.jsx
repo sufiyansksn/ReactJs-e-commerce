@@ -7,6 +7,7 @@ import "./CheckoutPage.css";
 
 export function CheckoutPage({ cart, loadCart }) {
   const [deliveryOptions, setDeliveryOptions] = useState([]);
+  
   const [paymentSummary, setPaymentSummary] = useState([null]); // paymentSummary is going to be object. and it is little easier to check if the object is not loaded if we set it to null at the start
 
   {/*
