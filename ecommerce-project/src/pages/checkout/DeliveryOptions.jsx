@@ -21,7 +21,7 @@ export function DeliveryOptions({cartItem, deliveryOptions, loadCart}) {
                 }
 
                 const updateDeliveryOptions = async () => {
-                    await axios.put(`/api/cart-items/${cartItem.productId}`, {
+                    await axios.put(`${import.meta.env.VITE_API_URL}/api/cart-items/${cartItem.productId}`, {
                         deliveryOptionId: deliveryOption.id     // we ccan send the deliveryOptionId that we want to update to deliveryOption.id
                     });
                     await loadCart(); //After updating the deliveryOption we are going to update the cart and webpage so we don't want to refresh
