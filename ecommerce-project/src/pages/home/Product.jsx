@@ -9,7 +9,7 @@ export function Product({product, loadCart}) {
     //Data Mutation.
     //This code sending a request to the backend telling it to this product to the cart with quantity 1.
     const addToCart = async () => {
-            await axios.post("/api/cart-items", {
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/cart-items`, {
                 productId: product.id,
                 quantity: quantity
             });
