@@ -19,7 +19,7 @@ export function OrderSummary({cart, deliveryOptions, loadCart}) {
             );
 
             const deleteCatrItem = async () => {
-                await axios.delete(`/api/cart-items/${cartItem.productId}`);
+                await axios.delete(`${import.meta.env.VITE_API_URL}/api/cart-items/${cartItem.productId}`);
                 await loadCart();
             }
 
