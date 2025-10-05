@@ -10,7 +10,7 @@ export function OrdersPage({ cart, loadCart }) {
 
     useEffect(() => {
         const fetchOrdersData = async () => {
-        const response = await axios.get('/api/orders?expand=products')
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/orders?expand=products`)
             setOrders(response.data);
         }
 
