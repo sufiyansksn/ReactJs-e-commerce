@@ -21,7 +21,7 @@ function App() {
 
   // writing await for waiting to finish the backend request and save the result in a variable.
   const loadCart = async () => {
-      const response = await axios.get('/api/cart-items?expand=product')  // When the backend receive this query parameter it's gonna add product details to the cart. it's going to expand the cart with product details.
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/cart-items?expand=product`)  // When the backend receive this query parameter it's gonna add product details to the cart. it's going to expand the cart with product details.
         setCart(response.data);
     }
 
