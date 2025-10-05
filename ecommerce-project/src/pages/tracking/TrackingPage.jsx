@@ -61,7 +61,7 @@ export function TrackingPage({ cart }) {
 
     useEffect(() => {
         const fetchTrackingData = async () => {
-        const response = await axios.get(`/api/orders/${orderId}?expand=products`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/orders/${orderId}?expand=products`);
         setOrder(response.data);
         };
 
