@@ -47,7 +47,7 @@ export function HomePage( {cart, loadCart} ) {
      create a new function and then run the function other wise it will break the rules of useeffect. */}
     useEffect(() => {
         const getHomeData = async () => {
-            const response = await axios.get('/api/products')
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`)
             setProducts(response.data)
         }
 
