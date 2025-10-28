@@ -11,14 +11,14 @@ export function Header({ cart }) { {/* getting cart form props */}
     return (
         <>
             <div className="header">
-                <div className="left-section">
+                {/* <div className="left-section">
                     <Link to="/" className="header-link">
                     <img className="logo"
-                        src="../../hello.jpg" /> 
+                        src="" />
                     <img className="mobile-logo"
-                        src="../../hello.jpg" /> 
+                        src="" />
                     </Link>
-                </div> 
+                </div> */}
 
                 <div className="middle-section">
                     <input className="search-bar" type="text" placeholder="Search" />
