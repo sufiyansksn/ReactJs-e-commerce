@@ -14,9 +14,9 @@ export function Header({ cart }) { {/* getting cart form props */}
                 {/* <div className="left-section">
                     <Link to="/" className="header-link">
                     <img className="logo"
-                        src="" />
+                        src="images/logo-white.png" />
                     <img className="mobile-logo"
-                        src="" />
+                        src="images/mobile-logo-white.png" />
                     </Link>
                 </div> */}
 
